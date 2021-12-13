@@ -4,7 +4,7 @@
 	import { user } from '../user';
 
 	let tasks = [];
-	let taskObject = {};
+
 
 	onMount(() => {
 		user
@@ -12,21 +12,30 @@
 			.map()
 			.once(async (data, id) => {
 				if (data) {
-					let newTask = { id, data };
-					console.log(newTask);
-					tasks = [...tasks, data];
-					taskObject = {
-						...newTask,
-						...taskObject
-					};
+					tasks = [...tasks, [id, data]];
 				}
 			});
 	});
 
-	function deleteTask() {}
+	async function deleteTask(taskId) {
+		await user.get('tasks').get(taskId).put(null)
+		//tasks = tasks.filter((task) => {
+			//return task[0] != taskId;
+		//})
+		tasks = []
+		user
+			.get('tasks')
+			.map()
+			.once(async (data, id) => {
+				if (data) {
+					tasks = [...tasks, [id, data]];
+				}
+			});
+		console.log('Deleted ' + taskId )
+	}
 </script>
 
 <h1>TaskList</h1>
 {#each tasks as task}
-	<p on:click={deleteTask} style="cursor: pointer">{task}</p>
+	<p on:click={deleteTask(task[0])} style="cursor: pointer">{task[1]} : {task[0]}</p>
 {/each}
