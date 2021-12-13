@@ -15,6 +15,7 @@
 			.once(async (data, id) => {
 				if (data) {
 					tasks = [...tasks, [id, data]];
+					console.log(tasks);
 				}
 			});
 	});
@@ -42,8 +43,10 @@
 	}
 
 	async function editTask(taskId) {
-		await user.get('tasks').get(taskId).set(task[1]);
+		let editTask = task[1];
+		await user.get('tasks').get(taskId).set(editTask);
 		edit = false;
+		console.log(tasks);
 	}
 </script>
 
