@@ -4,6 +4,8 @@
 	import { user } from '../user';
 
 	let tasks = [];
+	let task
+	let edit = false;
 
 
 	onMount(() => {
@@ -18,10 +20,8 @@
 	});
 
 	async function deleteTask(taskId) {
+		console.log('attempting delete')
 		await user.get('tasks').get(taskId).put(null)
-		//tasks = tasks.filter((task) => {
-			//return task[0] != taskId;
-		//})
 		tasks = []
 		user
 			.get('tasks')
@@ -32,10 +32,29 @@
 				}
 			});
 		console.log('Deleted ' + taskId )
+		edit = false;
+	}
+
+	async function toggleEditTask(taskId) {
+		task = await user.get('tasks').get(taskId)
+		console.log(task[1]);
+		edit = true;
+	}
+
+	async function editTask(taskId) {
+		await user.get('tasks').get(taskId).set(task[1]);
+		edit = false;
 	}
 </script>
 
 <h1>TaskList</h1>
 {#each tasks as task}
-	<p on:click={deleteTask(task[0])} style="cursor: pointer">{task[1]} : {task[0]}</p>
+	{#if edit}
+		<input type="text" bind:value={task[1]}>
+		<button on:click={deleteTask(task[0])}>X</button>
+		<button on:click={editTask(task[0])}>save</button>
+	{:else}
+		<p on:click={toggleEditTask(task[0])} style="cursor:pointer">{task[1]} : {task[0]}</p>
+	{/if}
 {/each}
+
