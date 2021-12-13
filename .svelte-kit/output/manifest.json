@@ -1,0 +1,83 @@
+{
+  ".svelte-kit/build/runtime/internal/start.js": {
+    "file": "start-8f7fe8a4.js",
+    "src": ".svelte-kit/build/runtime/internal/start.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor-c1c2ee31.js",
+      "_singletons-12a22614.js"
+    ],
+    "dynamicImports": [
+      ".svelte-kit/build/components/layout.svelte",
+      ".svelte-kit/build/components/error.svelte",
+      "src/routes/index.svelte",
+      "src/routes/login.svelte",
+      "src/routes/[user].svelte"
+    ],
+    "css": [
+      "assets/start-61d1577b.css"
+    ]
+  },
+  ".svelte-kit/build/components/layout.svelte": {
+    "file": "layout.svelte-ec761d77.js",
+    "src": ".svelte-kit/build/components/layout.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-c1c2ee31.js"
+    ]
+  },
+  ".svelte-kit/build/components/error.svelte": {
+    "file": "error.svelte-188db48d.js",
+    "src": ".svelte-kit/build/components/error.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-c1c2ee31.js"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "pages/index.svelte-ca370a70.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-c1c2ee31.js"
+    ]
+  },
+  "src/routes/login.svelte": {
+    "file": "pages/login.svelte-b9bc55cc.js",
+    "src": "src/routes/login.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-c1c2ee31.js",
+      "_user-8bdbed10.js",
+      "_singletons-12a22614.js"
+    ]
+  },
+  "src/routes/[user].svelte": {
+    "file": "pages/_user_.svelte-f16d60b5.js",
+    "src": "src/routes/[user].svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-c1c2ee31.js",
+      "_user-8bdbed10.js",
+      "_singletons-12a22614.js"
+    ]
+  },
+  "_vendor-c1c2ee31.js": {
+    "file": "chunks/vendor-c1c2ee31.js"
+  },
+  "_singletons-12a22614.js": {
+    "file": "chunks/singletons-12a22614.js"
+  },
+  "_user-8bdbed10.js": {
+    "file": "chunks/user-8bdbed10.js",
+    "imports": [
+      "_vendor-c1c2ee31.js",
+      "_singletons-12a22614.js"
+    ]
+  }
+}
