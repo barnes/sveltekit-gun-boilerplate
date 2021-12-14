@@ -8,7 +8,7 @@
 </script>
 
 <Logout />
-<h1>{$username}</h1>
+<h1 class="text-5xl bold text-center uppercase">{$username}</h1>
 <!-- <h2>{$page.params.user}</h2> -->
 <TaskForm />
 <TaskListNew />

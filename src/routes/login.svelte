@@ -19,12 +19,20 @@
 		username.set('');
 	}
 </script>
+<div class="p-4 m-4">
+	<label for="username">Username</label>
+	<input name="username" bind:value={username} minlength="3" maxlength="16" type="text" />
+</div>
 
-<label for="username">Username</label>
-<input class="border-1" name="username" bind:value={username} minlength="3" maxlength="16" />
 
-<label class="font-mono text-lg" for="password">Password</label>
-<input name="password" bind:value={password} type="password" />
+<div class="p-4 m-4">
+	<label for="password">Password</label>
+	<input name="password" bind:value={password} type="password" />
+</div>
 
-<button class="border-2 p-4 m-4" on:click={login}>Login</button>
-<button class="border-2 p-4 m-4" on:click={signup}>Sign Up</button>
+
+<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={login}>Login</button>
+<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={signup}>Sign Up</button>
+
+
+  

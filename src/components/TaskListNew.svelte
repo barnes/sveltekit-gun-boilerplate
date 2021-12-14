@@ -54,16 +54,21 @@
 
 </script>
 
-<h1>TaskList</h1>
-{#each tasks as task, i (task.id)}
-    {#if task.edit}
-        <input type="text" bind:value={editTaskContent}>
-        <button on:click={deleteTask(i)}>X</button>
-        <button on:click={editTask(i)}>save</button>
-        <br />
-        <br />
-    {:else}
-		<p on:click={toggleEditTask(i)} style="cursor:pointer">{task.id} : {task.data} : {task.edit}</p>
-    {/if}
-{/each}
+<div class="flex flex-wrap">
+    {#each tasks as task, i (task.id)}
+    <div class="bg-white w-64 rounded overflow-hidden shadow-sm mx-auto my-1" on:click={toggleEditTask(i)}>
+    <div class="px-6 h-18 py-4 max-h-sm">
+        {#if task.edit}
+                    <input class="w-full font-bold text-xl mb-2" type="text" bind:value={editTaskContent}> <br />
+                    <button on:click={deleteTask(i)}>X</button>
+                    <button on:click={editTask(i)}>save</button>	
+        {:else}
+            <div class="font-bold text-xl mb-2">{task.data}</div>
+            <button on:click={deleteTask(i)}>X</button>
+        {/if}
+    </div>
+    </div>
+    {/each}
+</div>
+
 
