@@ -21,10 +21,10 @@
 </script>
 
 <label for="username">Username</label>
-<input name="username" bind:value={username} minlength="3" maxlength="16" />
+<input class="border-1" name="username" bind:value={username} minlength="3" maxlength="16" />
 
-<label for="password">Password</label>
+<label class="font-mono text-lg" for="password">Password</label>
 <input name="password" bind:value={password} type="password" />
 
-<button class="login" on:click={login}>Login</button>
-<button class="login" on:click={signup}>Sign Up</button>
+<button class="border-2 p-4 m-4" on:click={login}>Login</button>
+<button class="border-2 p-4 m-4" on:click={signup}>Sign Up</button>
