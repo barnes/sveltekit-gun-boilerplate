@@ -2,8 +2,12 @@
 	import '../app.css';
 	import { user } from '../user.js';
 	import '../global.css';
+	import Header from '../components/Header.svelte';
 </script>
 
-<div class="bg-orange-100 container p-4 m-4  mx-auto">
-	<slot />
+<div class="container mx-auto my-5">
+	<Header />
+	<div class="bg-base-300 p-2">
+		<slot />
+	</div>
 </div>

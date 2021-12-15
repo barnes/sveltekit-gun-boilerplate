@@ -3,8 +3,6 @@ module.exports = {
 		extend: {}
 	},
 
-	plugins: [
-		require('@tailwindcss/forms'),
-	],
+	plugins: [require('@tailwindcss/forms'), require('daisyui')],
 	content: ['./src/**/*.{html,js,svelte,ts}']
 };
