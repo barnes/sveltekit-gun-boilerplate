@@ -24,3 +24,11 @@ I want to rewrite the TaskList component from scratch, trying to replace my jank
 # 12/13/2021 Evening
 
 TailwindCSS is now installed and functioning. Now it's time to learn Tailwind and get it all put together, looking nice.
+
+# 12/15/2021 Evening
+
+Tailwind / DaisyUI are set up but still seem bizarely challenging. Going to keep learning the ropes,but it looks better already.
+
+Need to refactor the auth side of things. The user page should pass the current user down to components.
+
+Need to refactor the way data is handled, trying to integrate Svelte stores more tightly as outlined in the GUN docs.

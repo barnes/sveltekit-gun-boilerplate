@@ -4,60 +4,74 @@
 	import { user } from '../user';
 
 	let tasks = [];
-	let task
-	let edit = false;
+	let editTaskContent = '';
 
-
-	onMount(() => {
+	function getDb() {
+		tasks = [];
 		user
 			.get('tasks')
 			.map()
 			.once(async (data, id) => {
 				if (data) {
-					tasks = [...tasks, [id, data]];
-					console.log(tasks);
+					let newTask = {
+						id,
+						data,
+						edit: false
+					};
+					tasks = [...tasks, newTask];
 				}
 			});
+	}
+
+	//Go and get each task from the db.
+	onMount(() => {
+		getDb();
 	});
 
-	async function deleteTask(taskId) {
-		console.log('attempting delete')
-		await user.get('tasks').get(taskId).put(null)
-		tasks = []
-		user
-			.get('tasks')
-			.map()
-			.once(async (data, id) => {
-				if (data) {
-					tasks = [...tasks, [id, data]];
-				}
-			});
-		console.log('Deleted ' + taskId )
-		edit = false;
+	//Delete a task and re-gather tasks from the DB.
+	//Maybe overkill to run this again if I can simply clean the local object...
+	async function deleteTask(i) {
+		await user.get('tasks').get(tasks[i].id).put(null);
+		getDb();
 	}
 
-	async function toggleEditTask(taskId) {
-		task = await user.get('tasks').get(taskId)
-		console.log(task[1]);
-		edit = true;
+	//Set a particular task to edit mode
+	function toggleEditTask(i) {
+		console.log('toggleEdit');
+		tasks[i].edit = !tasks[i].edit;
+		editTaskContent = tasks[i].data;
 	}
 
-	async function editTask(taskId) {
-		let editTask = task[1];
-		await user.get('tasks').get(taskId).set(editTask);
-		edit = false;
-		console.log(tasks);
+	async function editTask(i) {
+		console.log(editTaskContent);
+		await user.get('tasks').get(tasks[i].id).put(editTaskContent);
+		tasks[i].edit = false;
+		getDb();
 	}
 </script>
 
-<h1>TaskList</h1>
-{#each tasks as task}
-	{#if edit}
-		<input type="text" bind:value={task[1]}>
-		<button on:click={deleteTask(task[0])}>X</button>
-		<button on:click={editTask(task[0])}>save</button>
-	{:else}
-		<p on:click={toggleEditTask(task[0])} style="cursor:pointer">{task[1]} : {task[0]}</p>
-	{/if}
-{/each}
-
+<div class="flex flex-wrap">
+	{#each tasks as task, i (task.id)}
+		<div on:click={toggleEditTask(i)} class="card shadow-lg bg-base-100 mx-2 my-2">
+			<div class="flex-row items-center space-x-4 card-body">
+				{#if task.edit}
+					<input
+						class="input card-title text-base-content"
+						type="text"
+						bind:value={editTaskContent}
+					/>
+					<br />
+					<button class="btn btn-warning text-base-content" on:click={deleteTask(i)}>X</button>
+					<button class="btn btn-warning text-base-content" on:click={editTask(i)}>save</button>
+				{:else}
+					<div class="flex-1">
+						<div class="flex card-title text-base-content">{task.data}</div>
+					</div>
+					<div class="flex-0">
+						<button class="btn btn-warning text-base-content" on:click={deleteTask(i)}>X</button>
+					</div>
+				{/if}
+			</div>
+		</div>
+	{/each}
+</div>

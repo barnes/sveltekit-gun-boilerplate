@@ -22,5 +22,4 @@ db.on('auth', async (event) => {
 
 	console.log(`signed in as ${alias}`);
 	console.log(await user.get('pub'));
-	goto(`/${pub}`);
 });

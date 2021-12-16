@@ -2,8 +2,10 @@
 	import { user } from '../user';
 	let username;
 	let password;
+	import { goto } from '$app/navigation';
 	function login() {
 		user.auth(username, password, ({ err }) => err && alert(err));
+		goto(`/${username}`);
 	}
 	function signup() {
 		user.create(username, password, ({ err }) => {
@@ -19,20 +21,10 @@
 		username.set('');
 	}
 </script>
-<div class="p-4 m-4">
-	<label for="username">Username</label>
-	<input name="username" bind:value={username} minlength="3" maxlength="16" type="text" />
+
+<div class="form-control w-96 mx-auto">
+	<input type="text" placeholder="username" bind:value={username} class="input my-2" />
+	<input type="password" placeholder="username" bind:value={password} class="input my-2" />
+	<button class="btn btn-primary my-4" on:click={login}>Login</button>
+	<button class="btn btn-secondary" on:click={signup}>Sign Up</button>
 </div>
-
-
-<div class="p-4 m-4">
-	<label for="password">Password</label>
-	<input name="password" bind:value={password} type="password" />
-</div>
-
-
-<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={login}>Login</button>
-<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={signup}>Sign Up</button>
-
-
-  
