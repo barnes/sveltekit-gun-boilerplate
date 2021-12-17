@@ -7,7 +7,7 @@
 
 <div class="container mx-auto my-5">
 	<Header />
-	<div class="bg-neutral-focus rounded-box p-5 text-neutral-content">
+	<div class="bg-base-200 rounded-box p-5">
 		<slot />
 	</div>
 </div>
