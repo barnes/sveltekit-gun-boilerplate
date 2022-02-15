@@ -19,9 +19,9 @@
 	<p class="p-2 mx:auto text-center italic text-sm">
 		Press enter to submit your task. Click a task to edit or delete.
 	</p>
-	<input
+	<textarea
 		placeholder="enter a new task"
-		class="input w-full text-base-content"
+		class="input h-24 textarea textarea-bordered w-full text-base-content"
 		type="text"
 		bind:value={task}
 	/>

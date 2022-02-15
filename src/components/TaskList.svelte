@@ -1,10 +1,18 @@
 <script>
 	import { onMount } from 'svelte';
+	import Hoverable from './Hoverable.svelte';
+	import FaEdit from 'svelte-icons/fa/FaEdit.svelte'
+	import MdEdit from 'svelte-icons/md/MdEdit.svelte'
+	import Icon from 'svelte-awesome'
+	import {edit, trash} from 'svelte-awesome/icons'
+
+
 
 	import { user } from '../user';
 
 	let tasks = [];
 	let editTaskContent = '';
+	let overlayBool = false;
 
 	function getDb() {
 		tasks = [];
@@ -48,30 +56,43 @@
 		tasks[i].edit = false;
 		getDb();
 	}
+
+	function handleMouseOver() {
+		overlayBool = true;
+	}
+	function handleMouseOut() {
+		overlayBool = false;
+	}
 </script>
 
-<div class="flex flex-wrap">
+<div class="grid grid-cols-4 gap-2">
 	{#each tasks as task, i (task.id)}
-		<div on:click={toggleEditTask(i)} class="card shadow-lg bg-base-100 mx-2 my-2">
-			<div class="flex-row items-center space-x-4 card-body">
-				{#if task.edit}
-					<input
-						class="input card-title text-base-content"
+	<Hoverable let:hovering={hovering}>
+		<div class="card shadow-lg bg-base-100 mx-2 my-2 pb-3">
+			<div class="card-body">
+				<input type="checkbox" id={task.id} class="modal-toggle">
+				<div class="modal">
+					<div class="modal-box">
+						<textarea
+						class="h-24 w-full text-area card-title text-base-content"
 						type="text"
 						bind:value={editTaskContent}
 					/>
-					<br />
-					<button class="btn btn-warning text-base-content" on:click={deleteTask(i)}>X</button>
-					<button class="btn btn-warning text-base-content" on:click={editTask(i)}>save</button>
-				{:else}
-					<div class="flex-1">
-						<div class="flex card-title text-base-content">{task.data}</div>
+					  <div class="modal-action">
+						<label for={task.id} class="btn" on:click={editTask(i)}>Save</label>
+					  </div>
 					</div>
-					<div class="flex-0">
-						<button class="btn btn-warning text-base-content" on:click={deleteTask(i)}>X</button>
+				  </div>
+						<p>{task.data}</p>
+				
+					{#if hovering}
+					<div class="btn-group absolute bottom-2 left-2 z-10">
+						<button for={task.id} class="btn-sm btn modal-btn" on:click={toggleEditTask(i)}><Icon data={edit} scale="1" /></button>
+						<button class="btn-sm btn-warning btn text-base-content" on:click={deleteTask(i)}><Icon data={trash} scale="1" /></button>
 					</div>
-				{/if}
+					{/if}
 			</div>
 		</div>
+	</Hoverable>
 	{/each}
 </div>
