@@ -83,7 +83,7 @@
 					  </div>
 					</div>
 				  </div>
-						<p>{task.data}</p>
+						<p>{task.data} -test</p>
 				
 					{#if hovering}
 					<div class="btn-group absolute bottom-2 left-2 z-10">
